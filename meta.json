@@ -1,0 +1,11 @@
+{
+  "author":"Florian Frank",
+  "author_email":"flori@ping.de",
+  "documentation_url":"doc/index.html",
+  "download_url":"http://rubyforge.org/frs/?group_id=390",
+  "github_url": "http:\/\/github.com\/flori\/amatch\/tree\/master",
+  "homepage_url":"http://amatch.rubyforge.org",
+  "project_name":"String Matching Extension for Ruby",
+  "project_unixname":"amatch",
+  "project_url":"http://rubyforge.org/projects/amatch"
+}
