@@ -1,0 +1,401 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+	<title>Class: Amatch::Levenshtein</title>
+
+	<link rel="stylesheet" href="../rdoc.css" type="text/css" media="screen" />
+
+	<script src="../js/jquery.js" type="text/javascript"
+		charset="utf-8"></script>
+	<script src="../js/thickbox-compressed.js" type="text/javascript"
+		charset="utf-8"></script>
+	<script src="../js/quicksearch.js" type="text/javascript"
+		charset="utf-8"></script>
+	<script src="../js/darkfish.js" type="text/javascript"
+		charset="utf-8"></script>
+
+</head>
+<body class="class">
+
+	<div id="metadata">
+		<div id="file-metadata">
+			<div id="file-list-section" class="section">
+				<h3 class="section-header">In Files</h3>
+				<div class="section-body">
+					<ul>
+					
+						<li><a href="../lib/amatch/version_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
+							class="thickbox" title="lib/amatch/version.rb">lib/amatch/version.rb</a></li>
+					
+					</ul>
+				</div>
+			</div>
+
+			
+		</div>
+
+		<div id="class-metadata">
+
+			<!-- Parent Class -->
+			
+			<div id="parent-class-section" class="section">
+				<h3 class="section-header">Parent</h3>
+				
+				<p class="link">Object</p>
+				
+			</div>
+			
+
+			<!-- Namespace Contents -->
+			
+
+			<!-- Method Quickref -->
+			
+			<div id="method-list-section" class="section">
+				<h3 class="section-header">Methods</h3>
+				<ul class="link-list">
+					
+					<li><a href="#M000000">::new</a></li>
+					
+					<li><a href="#M000003">#match</a></li>
+					
+					<li><a href="#M000001">#pattern</a></li>
+					
+					<li><a href="#M000002">#pattern=</a></li>
+					
+					<li><a href="#M000004">#search</a></li>
+					
+					<li><a href="#M000005">#similar</a></li>
+					
+				</ul>
+			</div>
+			
+
+			<!-- Included Modules -->
+			
+		</div>
+
+		<div id="project-metadata">
+			
+			
+			<div id="fileindex-section" class="section project-section">
+				<h3 class="section-header">Files</h3>
+				<ul>
+				
+					<li class="file"><a href="../doc-main_txt.html">doc-main.txt</a></li>
+				
+				</ul>
+			</div>
+			
+
+			<div id="classindex-section" class="section project-section">
+				<h3 class="section-header">Class Index
+					<span class="search-toggle"><img src="../images/find.png"
+						height="16" width="16" alt="[+]"
+						title="show/hide quicksearch" /></span></h3>
+				<form action="#" method="get" accept-charset="utf-8" class="initially-hidden">
+				<fieldset>
+					<legend>Quicksearch</legend>
+					<input type="text" name="quicksearch" value=""
+						class="quicksearch-field" />
+				</fieldset>
+				</form>
+
+				<ul class="link-list">
+				
+					<li><a href="../Amatch.html">Amatch</a></li>
+				
+					<li><a href="../Amatch/Hamming.html">Amatch::Hamming</a></li>
+				
+					<li><a href="../Amatch/Jaro.html">Amatch::Jaro</a></li>
+				
+					<li><a href="../Amatch/JaroWinkler.html">Amatch::JaroWinkler</a></li>
+				
+					<li><a href="../Amatch/Levenshtein.html">Amatch::Levenshtein</a></li>
+				
+					<li><a href="../Amatch/LongestSubsequence.html">Amatch::LongestSubsequence</a></li>
+				
+					<li><a href="../Amatch/LongestSubstring.html">Amatch::LongestSubstring</a></li>
+				
+					<li><a href="../Amatch/PairDistance.html">Amatch::PairDistance</a></li>
+				
+					<li><a href="../Amatch/Sellers.html">Amatch::Sellers</a></li>
+				
+					<li><a href="../String.html">String</a></li>
+				
+				</ul>
+				<div id="no-class-search-results" style="display: none;">No matching classes.</div>
+			</div>
+
+			
+		</div>
+	</div>
+
+	<div id="documentation">
+		<h1 class="class">Amatch::Levenshtein</h1>
+
+		<div id="description">
+			<p>
+The <a href="Levenshtein.html">Levenshtein</a> edit distance is defined as
+the minimal costs involved to transform one string into another by using
+three elementary operations: deletion, insertion and substitution of a
+character. To transform &#8220;water&#8221; into &#8220;wine&#8221;, for
+instance, you have to substitute &#8220;a&#8221; -> &#8220;i&#8221;:
+&#8220;witer&#8221;, &#8220;t&#8221; -> &#8220;n&#8221;:
+&#8220;winer&#8221; and delete &#8220;r&#8221;: &#8220;wine&#8221;. The
+edit distance between &#8220;water&#8221; and &#8220;wine&#8221; is 3,
+because you have to apply three operations. The edit distance between
+&#8220;wine&#8221; and &#8220;wine&#8221; is 0 of course: no operation is
+necessary for the transformation &#8212; they&#8217;re already the same
+string. It&#8217;s easy to see that more similar strings have smaller edit
+distances than strings that differ a lot.
+</p>
+
+		</div>
+
+		<!-- Constants -->
+		
+
+		<!-- Attributes -->
+		
+
+		<!-- Methods -->
+		
+		<div id="public-class-method-details" class="method-section section">
+			<h3 class="section-header">Public Class Methods</h3>
+
+		
+			<div id="new-method" class="method-detail ">
+				<a name="M000000"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-callseq">new(pattern)</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					<p>
+Creates a new <a href="Levenshtein.html">Amatch::Levenshtein</a> instance
+from <tt>pattern</tt>.
+</p>
+					
+
+					
+					<div class="method-source-code"
+						id="new-source">
+<pre>
+static VALUE rb_Levenshtein_initialize(VALUE self, VALUE pattern)
+{
+    GET_STRUCT(General)
+    General_pattern_set(amatch, pattern);
+    return self;
+}</pre>
+					</div>
+					
+				</div>
+
+				
+			</div>
+
+		
+		</div>
+	
+		<div id="public-instance-method-details" class="method-section section">
+			<h3 class="section-header">Public Instance Methods</h3>
+
+		
+			<div id="match-method" class="method-detail ">
+				<a name="M000003"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-callseq">match(strings) &rarr; results</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					<p>
+Uses this <a href="Levenshtein.html">Amatch::Levenshtein</a> instance to
+match <a href="Levenshtein.html#M000001">Amatch::Levenshtein#pattern</a>
+against <tt>strings</tt>. It returns the number operations, the <a
+href="Sellers.html">Sellers</a> distance. <tt>strings</tt> has to be either
+a <a href="../String.html">String</a> or an Array of Strings. The returned
+<tt>results</tt> are either a Float or an Array of Floats respectively.
+</p>
+					
+
+					
+					<div class="method-source-code"
+						id="match-source">
+<pre>
+static VALUE rb_Levenshtein_match(VALUE self, VALUE strings)
+{                                                                            
+    GET_STRUCT(General)
+    return General_iterate_strings(amatch, strings, Levenshtein_match);
+}</pre>
+					</div>
+					
+				</div>
+
+				
+			</div>
+
+		
+			<div id="pattern-method" class="method-detail ">
+				<a name="M000001"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-callseq">pattern &rarr; pattern string</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					<p>
+Returns the current pattern string of this instance.
+</p>
+					
+
+					
+				</div>
+
+				
+			</div>
+
+		
+			<div id="pattern--method" class="method-detail ">
+				<a name="M000002"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-callseq">pattern=(pattern)</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					<p>
+Sets the current pattern string of this instance to <tt>pattern</tt>.
+</p>
+					
+
+					
+				</div>
+
+				
+			</div>
+
+		
+			<div id="search-method" class="method-detail ">
+				<a name="M000004"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-callseq">search(strings) &rarr; results</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					<p>
+searches <a href="Levenshtein.html#M000001">Amatch::Levenshtein#pattern</a>
+in <tt>strings</tt> and returns the edit distance (the sum of character
+operations) as a Fixnum value, by greedy trimming prefixes or postfixes of
+the match. <tt>strings</tt> has to be either a <a
+href="../String.html">String</a> or an Array of Strings. The returned
+<tt>results</tt> are either a Float or an Array of Floats respectively.
+</p>
+					
+
+					
+					<div class="method-source-code"
+						id="search-source">
+<pre>
+static VALUE rb_Levenshtein_search(VALUE self, VALUE strings)
+{                                                                            
+    GET_STRUCT(General)
+    return General_iterate_strings(amatch, strings, Levenshtein_search);
+}</pre>
+					</div>
+					
+				</div>
+
+				
+			</div>
+
+		
+			<div id="similar-method" class="method-detail ">
+				<a name="M000005"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-callseq">similar(strings) &rarr; results</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					<p>
+Uses this <a href="Levenshtein.html">Amatch::Levenshtein</a> instance to
+match <a href="Levenshtein.html#M000001">Amatch::Levenshtein#pattern</a>
+against <tt>strings</tt>, and compute a <a
+href="Levenshtein.html">Levenshtein</a> distance metric number between 0.0
+for very unsimilar strings and 1.0 for an exact match. <tt>strings</tt> has
+to be either a <a href="../String.html">String</a> or an Array of Strings.
+The returned <tt>results</tt> are either a Fixnum or an Array of Fixnums
+respectively.
+</p>
+					
+
+					
+					<div class="method-source-code"
+						id="similar-source">
+<pre>
+static VALUE rb_Levenshtein_similar(VALUE self, VALUE strings)
+{                                                                            
+    GET_STRUCT(General)
+    return General_iterate_strings(amatch, strings, Levenshtein_similar);
+}</pre>
+					</div>
+					
+				</div>
+
+				
+			</div>
+
+		
+		</div>
+	
+
+	</div>
+
+
+	<div id="rdoc-debugging-section-dump" class="debugging-section">
+	
+		<p>Disabled; run with --debug to generate this.</p>
+	
+	</div>
+
+	<div id="validator-badges">
+		<p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+		<p><small>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish
+			Rdoc Generator</a> 1.1.6</small>.</p>
+	</div>
+
+</body>
+</html>
+

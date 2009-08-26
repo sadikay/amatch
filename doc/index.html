@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+	"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+	<title>amatch - Approximate Matching</title>
+
+	<link type="text/css" media="screen" href="rdoc.css" rel="stylesheet" />
+
+	<script src="js/jquery.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/thickbox-compressed.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/quicksearch.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/darkfish.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+<body class="indexpage">
+
+	
+	<h1>amatch - Approximate Matching</h1>
+
+	
+	<div id="main">
+		<h2>amatch - Approximate Matching Extension for Ruby</h2>
+<h3>Description</h3>
+<p>
+This is a collection of classes that can be used for Approximate matching,
+searching, and comparing of Strings. They implement algorithms that compute
+the Levenshtein edit distance, Sellers edit distance, the Hamming distance,
+the longest common subsequence length, the longest common substring length,
+the pair distance metric, the Jaro-Winkler metric.
+</p>
+<h3>Author</h3>
+<p>
+Florian Frank <a href="mailto:flori@ping.de">flori@ping.de</a>
+</p>
+<h3>License</h3>
+<p>
+This is free software; you can redistribute it and/or modify it under the
+terms of the GNU General Public License Version 2 as published by the Free
+Software Foundation: <a
+href="http://www.gnu.org/copyleft/gpl.html">www.gnu.org/copyleft/gpl.html</a>
+</p>
+<h3>Download</h3>
+<p>
+The latest version of <b>amatch</b> can be found at
+</p>
+<ul>
+<li><a
+href="http://rubyforge.org/frs/?group_id=390">rubyforge.org/frs/?group_id=390</a>
+
+</li>
+</ul>
+<p>
+Online Documentation should be located at
+</p>
+<ul>
+<li><a href="http://amatch.rubyforge.org">amatch.rubyforge.org</a>
+
+</li>
+</ul>
+<h3>Examples</h3>
+<pre>
+ require 'amatch'
+ # =&gt; true
+ include Amatch
+ # =&gt; Object
+
+ m = Sellers.new(&quot;pattern&quot;)
+ # =&gt; #&lt;Amatch::Sellers:0x40366324&gt;
+ m.match(&quot;pattren&quot;)
+ # =&gt; 2.0
+ m.substitution = m.insertion = 3
+ # =&gt; 3
+ m.match(&quot;pattren&quot;)
+ # =&gt; 4.0
+ m.reset_weights
+ # =&gt; #&lt;Amatch::Sellers:0x40366324&gt;
+ m.match([&quot;pattren&quot;,&quot;parent&quot;])
+ # =&gt; [2.0, 4.0]
+ m.search(&quot;abcpattrendef&quot;)
+ # =&gt; 2.0
+
+ m = Levenshtein.new(&quot;pattern&quot;)
+ # =&gt; #&lt;Amatch::Levenshtein:0x4035919c&gt;
+ m.match(&quot;pattren&quot;)
+ # =&gt; 2
+ m.search(&quot;abcpattrendef&quot;)
+ # =&gt; 2
+ &quot;pattern language&quot;.levenshtein_similar(&quot;language of patterns&quot;)
+ # =&gt; 0.2
+
+ m = Hamming.new(&quot;pattern&quot;)
+ # =&gt; #&lt;Amatch::Hamming:0x40350858&gt;
+ m.match(&quot;pattren&quot;)
+ # =&gt; 2
+ &quot;pattern language&quot;.hamming_similar(&quot;language of patterns&quot;)
+ # =&gt; 0.1
+
+ m = PairDistance.new(&quot;pattern&quot;)
+ # =&gt; #&lt;Amatch::PairDistance:0x40349be8&gt;
+ m.match(&quot;pattr en&quot;)
+ # =&gt; 0.545454545454545
+ m.match(&quot;pattr en&quot;, nil)
+ # =&gt; 0.461538461538462
+ m.match(&quot;pattr en&quot;, /t+/)
+ # =&gt; 0.285714285714286
+ &quot;pattern language&quot;.pair_distance_similar(&quot;language of patterns&quot;)
+ # =&gt; 0.928571428571429
+
+ m = LongestSubsequence.new(&quot;pattern&quot;)
+ # =&gt; #&lt;Amatch::LongestSubsequence:0x4033e900&gt;
+ m.match(&quot;pattren&quot;)
+ # =&gt; 6
+ &quot;pattern language&quot;.longest_subsequence_similar(&quot;language of patterns&quot;)
+ # =&gt; 0.4
+
+ m = LongestSubstring.new(&quot;pattern&quot;)
+ # =&gt; #&lt;Amatch::LongestSubstring:0x403378d0&gt;
+ m.match(&quot;pattren&quot;)
+ # =&gt; 4
+ &quot;pattern language&quot;.longest_substring_similar(&quot;language of patterns&quot;)
+ # =&gt; 0.4
+
+ m = Jaro.new(&quot;pattern&quot;)
+ # =&gt; #&lt;Amatch::Jaro:0x363b70&gt;
+ m.match(&quot;paTTren&quot;)
+ # =&gt; 0.952380952380952
+ m.ignore_case = false
+ m.match(&quot;paTTren&quot;)
+ # =&gt; 0.742857142857143
+ &quot;pattern language&quot;.jaro_similar(&quot;language of patterns&quot;)
+ # =&gt; 0.672222222222222
+
+ m = JaroWinkler.new(&quot;pattern&quot;)
+ # #&lt;Amatch::JaroWinkler:0x3530b8&gt;
+ m.match(&quot;paTTren&quot;)
+ # =&gt; 0.971428571712403
+ m.ignore_case = false
+ m.match(&quot;paTTren&quot;)
+ # =&gt; 0.79428571505206
+ m.scaling_factor = 0.05
+ m.match(&quot;pattren&quot;)
+ # =&gt; 0.961904762046678
+ &quot;pattern language&quot;.jarowinkler_similar(&quot;language of patterns&quot;)
+ # =&gt; 0.672222222222222
+</pre>
+
+	</div>
+	
+
+	
+	
+	<h2>Files</h2>
+	<ul>
+		
+			<li class="file"><a href="doc-main_txt.html">doc-main.txt</a></li>
+		
+	</ul>
+	
+
+	<h2>Classes/Modules</h2>
+	<ul>
+		
+		<li class="module"><a href="Amatch.html">Amatch</a></li>
+		
+		<li class="class"><a href="Amatch/Hamming.html">Amatch::Hamming</a></li>
+		
+		<li class="class"><a href="Amatch/Jaro.html">Amatch::Jaro</a></li>
+		
+		<li class="class"><a href="Amatch/JaroWinkler.html">Amatch::JaroWinkler</a></li>
+		
+		<li class="class"><a href="Amatch/Levenshtein.html">Amatch::Levenshtein</a></li>
+		
+		<li class="class"><a href="Amatch/LongestSubsequence.html">Amatch::LongestSubsequence</a></li>
+		
+		<li class="class"><a href="Amatch/LongestSubstring.html">Amatch::LongestSubstring</a></li>
+		
+		<li class="class"><a href="Amatch/PairDistance.html">Amatch::PairDistance</a></li>
+		
+		<li class="class"><a href="Amatch/Sellers.html">Amatch::Sellers</a></li>
+		
+		<li class="class"><a href="String.html">String</a></li>
+		
+	</ul>
+
+	<h2>Methods</h2>
+	<ul>
+		
+			<li><a href="Amatch/PairDistance.html#M000026">::new &mdash; Amatch::PairDistance</a></li>
+		
+			<li><a href="Amatch/LongestSubsequence.html#M000031">::new &mdash; Amatch::LongestSubsequence</a></li>
+		
+			<li><a href="Amatch/Jaro.html#M000043">::new &mdash; Amatch::Jaro</a></li>
+		
+			<li><a href="Amatch/JaroWinkler.html#M000050">::new &mdash; Amatch::JaroWinkler</a></li>
+		
+			<li><a href="Amatch/LongestSubstring.html#M000037">::new &mdash; Amatch::LongestSubstring</a></li>
+		
+			<li><a href="Amatch/Levenshtein.html#M000000">::new &mdash; Amatch::Levenshtein</a></li>
+		
+			<li><a href="Amatch/Sellers.html#M000007">::new &mdash; Amatch::Sellers</a></li>
+		
+			<li><a href="Amatch/Hamming.html#M000020">::new &mdash; Amatch::Hamming</a></li>
+		
+			<li><a href="Amatch/Sellers.html#M000012">#deletion &mdash; Amatch::Sellers</a></li>
+		
+			<li><a href="Amatch/Sellers.html#M000013">#deletion= &mdash; Amatch::Sellers</a></li>
+		
+			<li><a href="String.html#M000025">#hamming_similar &mdash; String</a></li>
+		
+			<li><a href="Amatch/JaroWinkler.html#M000053">#ignore_case &mdash; Amatch::JaroWinkler</a></li>
+		
+			<li><a href="Amatch/Jaro.html#M000046">#ignore_case &mdash; Amatch::Jaro</a></li>
+		
+			<li><a href="Amatch/JaroWinkler.html#M000054">#ignore_case= &mdash; Amatch::JaroWinkler</a></li>
+		
+			<li><a href="Amatch/Jaro.html#M000047">#ignore_case= &mdash; Amatch::Jaro</a></li>
+		
+			<li><a href="Amatch/Sellers.html#M000014">#insertion &mdash; Amatch::Sellers</a></li>
+		
+			<li><a href="Amatch/Sellers.html#M000015">#insertion= &mdash; Amatch::Sellers</a></li>
+		
+			<li><a href="String.html#M000049">#jaro_similar &mdash; String</a></li>
+		
+			<li><a href="String.html#M000058">#jarowinkler_similar &mdash; String</a></li>
+		
+			<li><a href="String.html#M000006">#levenshtein_similar &mdash; String</a></li>
+		
+			<li><a href="String.html#M000036">#longest_subsequence_similar &mdash; String</a></li>
+		
+			<li><a href="String.html#M000042">#longest_substring_similar &mdash; String</a></li>
+		
+			<li><a href="Amatch/PairDistance.html#M000029">#match &mdash; Amatch::PairDistance</a></li>
+		
+			<li><a href="Amatch/Sellers.html#M000017">#match &mdash; Amatch::Sellers</a></li>
+		
+			<li><a href="Amatch/LongestSubsequence.html#M000034">#match &mdash; Amatch::LongestSubsequence</a></li>
+		
+			<li><a href="Amatch/LongestSubstring.html#M000040">#match &mdash; Amatch::LongestSubstring</a></li>
+		
+			<li><a href="Amatch/Jaro.html#M000048">#match &mdash; Amatch::Jaro</a></li>
+		
+			<li><a href="Amatch/Levenshtein.html#M000003">#match &mdash; Amatch::Levenshtein</a></li>
+		
+			<li><a href="Amatch/JaroWinkler.html#M000057">#match &mdash; Amatch::JaroWinkler</a></li>
+		
+			<li><a href="Amatch/Hamming.html#M000023">#match &mdash; Amatch::Hamming</a></li>
+		
+			<li><a href="String.html#M000030">#pair_distance_similar &mdash; String</a></li>
+		
+			<li><a href="Amatch/Levenshtein.html#M000001">#pattern &mdash; Amatch::Levenshtein</a></li>
+		
+			<li><a href="Amatch/Jaro.html#M000044">#pattern &mdash; Amatch::Jaro</a></li>
+		
+			<li><a href="Amatch/LongestSubsequence.html#M000032">#pattern &mdash; Amatch::LongestSubsequence</a></li>
+		
+			<li><a href="Amatch/LongestSubstring.html#M000038">#pattern &mdash; Amatch::LongestSubstring</a></li>
+		
+			<li><a href="Amatch/JaroWinkler.html#M000051">#pattern &mdash; Amatch::JaroWinkler</a></li>
+		
+			<li><a href="Amatch/PairDistance.html#M000027">#pattern &mdash; Amatch::PairDistance</a></li>
+		
+			<li><a href="Amatch/Sellers.html#M000008">#pattern &mdash; Amatch::Sellers</a></li>
+		
+			<li><a href="Amatch/Hamming.html#M000021">#pattern &mdash; Amatch::Hamming</a></li>
+		
+			<li><a href="Amatch/Sellers.html#M000009">#pattern= &mdash; Amatch::Sellers</a></li>
+		
+			<li><a href="Amatch/LongestSubstring.html#M000039">#pattern= &mdash; Amatch::LongestSubstring</a></li>
+		
+			<li><a href="Amatch/JaroWinkler.html#M000052">#pattern= &mdash; Amatch::JaroWinkler</a></li>
+		
+			<li><a href="Amatch/PairDistance.html#M000028">#pattern= &mdash; Amatch::PairDistance</a></li>
+		
+			<li><a href="Amatch/Jaro.html#M000045">#pattern= &mdash; Amatch::Jaro</a></li>
+		
+			<li><a href="Amatch/Hamming.html#M000022">#pattern= &mdash; Amatch::Hamming</a></li>
+		
+			<li><a href="Amatch/Levenshtein.html#M000002">#pattern= &mdash; Amatch::Levenshtein</a></li>
+		
+			<li><a href="Amatch/LongestSubsequence.html#M000033">#pattern= &mdash; Amatch::LongestSubsequence</a></li>
+		
+			<li><a href="Amatch/Sellers.html#M000016">#reset_weights &mdash; Amatch::Sellers</a></li>
+		
+			<li><a href="Amatch/JaroWinkler.html#M000055">#scaling_factor &mdash; Amatch::JaroWinkler</a></li>
+		
+			<li><a href="Amatch/JaroWinkler.html#M000056">#scaling_factor= &mdash; Amatch::JaroWinkler</a></li>
+		
+			<li><a href="Amatch/Levenshtein.html#M000004">#search &mdash; Amatch::Levenshtein</a></li>
+		
+			<li><a href="Amatch/Sellers.html#M000018">#search &mdash; Amatch::Sellers</a></li>
+		
+			<li><a href="Amatch/LongestSubsequence.html#M000035">#similar &mdash; Amatch::LongestSubsequence</a></li>
+		
+			<li><a href="Amatch/JaroWinkler.html#M000061">#similar &mdash; Amatch::JaroWinkler</a></li>
+		
+			<li><a href="Amatch/Sellers.html#M000019">#similar &mdash; Amatch::Sellers</a></li>
+		
+			<li><a href="Amatch/Levenshtein.html#M000005">#similar &mdash; Amatch::Levenshtein</a></li>
+		
+			<li><a href="Amatch/Jaro.html#M000060">#similar &mdash; Amatch::Jaro</a></li>
+		
+			<li><a href="Amatch/Hamming.html#M000024">#similar &mdash; Amatch::Hamming</a></li>
+		
+			<li><a href="Amatch/PairDistance.html#M000059">#similar &mdash; Amatch::PairDistance</a></li>
+		
+			<li><a href="Amatch/LongestSubstring.html#M000041">#similar &mdash; Amatch::LongestSubstring</a></li>
+		
+			<li><a href="Amatch/Sellers.html#M000010">#substitution &mdash; Amatch::Sellers</a></li>
+		
+			<li><a href="Amatch/Sellers.html#M000011">#substitution= &mdash; Amatch::Sellers</a></li>
+		
+	</ul>
+
+	<div id="validator-badges">
+		<p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+		<p><small>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish
+			Rdoc Generator</a> 1.1.6</small>.</p>
+	</div>
+</body>
+</html>
