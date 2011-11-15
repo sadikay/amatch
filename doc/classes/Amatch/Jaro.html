@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>Amatch::Jaro</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="../../css/reset.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen" />
+    <script src="../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../js/main.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>     
+    <div class="banner">
+        <h1>
+            <span class="type">Class</span> 
+            Amatch::Jaro 
+            
+                <span class="parent">&lt; 
+                    
+                    Object
+                    
+                </span>
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../files/ext/amatch_ext_c.html">ext/amatch_ext.c</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+    
+    <div class="description">
+        <p>
+This class computes the <a href="Jaro.html">Jaro</a> metric for two
+strings. The <a href="Jaro.html">Jaro</a> metric computes the similarity
+between 0 (no match) and 1 (exact match) by looking for matching and
+transposed characters.
+</p>
+
+    </div>
+    
+
+    
+
+    
+    
+
+    
+    
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+    
+        <dt>I</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M000046">ignore_case</a>,</li>
+                
+                <li><a href="#M000047">ignore_case=</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>M</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M000048">match</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>N</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M000043">new</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>P</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M000044">pattern</a>,</li>
+                
+                <li><a href="#M000045">pattern=</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>S</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M000060">similar</a></li>
+                
+            </ul>
+        </dd>
+    
+    </dl>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+            <div class="sectiontitle">Class Public methods</div>
+            
+            <div class="method">
+                <div class="title" id="M000043">
+                    
+                    <a name="M000043"></a><b> new(pattern)
+</b>
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Creates a new <a href="Jaro.html">Amatch::Jaro</a> instance from
+<tt>pattern</tt>.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000043_source')" id="l_M000043_source">show</a>
+                        
+                    </p>
+                    <div id="M000043_source" class="dyn-source">
+                        <pre>static VALUE rb_Jaro_initialize(VALUE self, VALUE pattern)
+{
+    GET_STRUCT(Jaro)
+    Jaro_pattern_set(amatch, pattern);
+    amatch-&gt;ignore_case = 1;
+    return self;
+}</pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="sectiontitle">Instance Public methods</div>
+            
+            <div class="method">
+                <div class="title" id="M000046">
+                    
+                    <a name="M000046"></a><b> ignore_case &rarr; true/false
+</b>
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Returns whether case is ignored when computing matching characters.
+</p>
+
+                </div>
+                
+                
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000047">
+                    
+                    <a name="M000047"></a><b> ignore_case=(true/false)
+</b>
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Sets whether case is ignored when computing matching characters.
+</p>
+
+                </div>
+                
+                
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000048">
+                    
+                    <a name="M000048"></a><b> match(strings) &rarr; results
+</b>
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Uses this <a href="Jaro.html">Amatch::Jaro</a> instance to match <a
+href="Jaro.html#M000044">Jaro#pattern</a> against <tt>strings</tt>, that is
+compute the jaro metric with the strings. <tt>strings</tt> has to be either
+a <a href="../String.html">String</a> or an Array of Strings. The returned
+<tt>results</tt> is either a Float or an Array of Floats respectively.
+</p>
+
+                </div>
+                
+                
+                <div class="aka">
+                    This method is also aliased as
+                    
+                    <a href="Jaro.html#M000060">similar</a>
+                    
+                </div>
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000048_source')" id="l_M000048_source">show</a>
+                        
+                    </p>
+                    <div id="M000048_source" class="dyn-source">
+                        <pre>static VALUE rb_Jaro_match(VALUE self, VALUE strings)
+{
+    GET_STRUCT(Jaro)
+    return Jaro_iterate_strings(amatch, strings, Jaro_match);
+}</pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000044">
+                    
+                    <a name="M000044"></a><b> pattern &rarr; pattern string
+</b>
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Returns the current pattern string of this instance.
+</p>
+
+                </div>
+                
+                
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000045">
+                    
+                    <a name="M000045"></a><b> pattern=(pattern)
+</b>
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Sets the current pattern string of this instance to <tt>pattern</tt>.
+</p>
+
+                </div>
+                
+                
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000060">
+                    
+                    <a name="M000060"></a><b>similar</b>(p1)
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Alias for <a href="Jaro.html#M000048">match</a>
+</p>
+
+                </div>
+                
+                
+                
+            </div>
+            
+</div>
+    </div>
+  </body>
+</html>    

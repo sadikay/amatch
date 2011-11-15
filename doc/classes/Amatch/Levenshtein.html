@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>Amatch::Levenshtein</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="../../css/reset.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen" />
+    <script src="../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../js/main.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>     
+    <div class="banner">
+        <h1>
+            <span class="type">Class</span> 
+            Amatch::Levenshtein 
+            
+                <span class="parent">&lt; 
+                    
+                    Object
+                    
+                </span>
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../files/ext/amatch_ext_c.html">ext/amatch_ext.c</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+    
+    <div class="description">
+        <p>
+The <a href="Levenshtein.html">Levenshtein</a> edit distance is defined as
+the minimal costs involved to transform one string into another by using
+three elementary operations: deletion, insertion and substitution of a
+character. To transform &#8220;water&#8221; into &#8220;wine&#8221;, for
+instance, you have to substitute &#8220;a&#8221; -> &#8220;i&#8221;:
+&#8220;witer&#8221;, &#8220;t&#8221; -> &#8220;n&#8221;:
+&#8220;winer&#8221; and delete &#8220;r&#8221;: &#8220;wine&#8221;. The
+edit distance between &#8220;water&#8221; and &#8220;wine&#8221; is 3,
+because you have to apply three operations. The edit distance between
+&#8220;wine&#8221; and &#8220;wine&#8221; is 0 of course: no operation is
+necessary for the transformation &#8212; they&#8217;re already the same
+string. It&#8217;s easy to see that more similar strings have smaller edit
+distances than strings that differ a lot.
+</p>
+
+    </div>
+    
+
+    
+
+    
+    
+
+    
+    
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+    
+        <dt>M</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M000003">match</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>N</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M000000">new</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>P</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M000001">pattern</a>,</li>
+                
+                <li><a href="#M000002">pattern=</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>S</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M000004">search</a>,</li>
+                
+                <li><a href="#M000005">similar</a></li>
+                
+            </ul>
+        </dd>
+    
+    </dl>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+            <div class="sectiontitle">Class Public methods</div>
+            
+            <div class="method">
+                <div class="title" id="M000000">
+                    
+                    <a name="M000000"></a><b> new(pattern)
+</b>
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Creates a new <a href="Levenshtein.html">Amatch::Levenshtein</a> instance
+from <tt>pattern</tt>.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000000_source')" id="l_M000000_source">show</a>
+                        
+                    </p>
+                    <div id="M000000_source" class="dyn-source">
+                        <pre>static VALUE rb_Levenshtein_initialize(VALUE self, VALUE pattern)
+{
+    GET_STRUCT(General)
+    General_pattern_set(amatch, pattern);
+    return self;
+}</pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="sectiontitle">Instance Public methods</div>
+            
+            <div class="method">
+                <div class="title" id="M000003">
+                    
+                    <a name="M000003"></a><b> match(strings) &rarr; results
+</b>
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Uses this <a href="Levenshtein.html">Amatch::Levenshtein</a> instance to
+match <a href="Levenshtein.html#M000001">Amatch::Levenshtein#pattern</a>
+against <tt>strings</tt>. It returns the number operations, the <a
+href="Sellers.html">Sellers</a> distance. <tt>strings</tt> has to be either
+a <a href="../String.html">String</a> or an Array of Strings. The returned
+<tt>results</tt> is either a Float or an Array of Floats respectively.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000003_source')" id="l_M000003_source">show</a>
+                        
+                    </p>
+                    <div id="M000003_source" class="dyn-source">
+                        <pre>static VALUE rb_Levenshtein_match(VALUE self, VALUE strings)
+{                                                                            
+    GET_STRUCT(General)
+    return General_iterate_strings(amatch, strings, Levenshtein_match);
+}</pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000001">
+                    
+                    <a name="M000001"></a><b> pattern &rarr; pattern string
+</b>
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Returns the current pattern string of this instance.
+</p>
+
+                </div>
+                
+                
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000002">
+                    
+                    <a name="M000002"></a><b> pattern=(pattern)
+</b>
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Sets the current pattern string of this instance to <tt>pattern</tt>.
+</p>
+
+                </div>
+                
+                
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000004">
+                    
+                    <a name="M000004"></a><b> search(strings) &rarr; results
+</b>
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+searches <a href="Levenshtein.html#M000001">Amatch::Levenshtein#pattern</a>
+in <tt>strings</tt> and returns the edit distance (the sum of character
+operations) as a Fixnum value, by greedy trimming prefixes or postfixes of
+the match. <tt>strings</tt> has to be either a <a
+href="../String.html">String</a> or an Array of Strings. The returned
+<tt>results</tt> is either a Float or an Array of Floats respectively.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000004_source')" id="l_M000004_source">show</a>
+                        
+                    </p>
+                    <div id="M000004_source" class="dyn-source">
+                        <pre>static VALUE rb_Levenshtein_search(VALUE self, VALUE strings)
+{                                                                            
+    GET_STRUCT(General)
+    return General_iterate_strings(amatch, strings, Levenshtein_search);
+}</pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000005">
+                    
+                    <a name="M000005"></a><b> similar(strings) &rarr; results
+</b>
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Uses this <a href="Levenshtein.html">Amatch::Levenshtein</a> instance to
+match <a href="Levenshtein.html#M000001">Amatch::Levenshtein#pattern</a>
+against <tt>strings</tt>, and compute a <a
+href="Levenshtein.html">Levenshtein</a> distance metric number between 0.0
+for very unsimilar strings and 1.0 for an exact match. <tt>strings</tt> has
+to be either a <a href="../String.html">String</a> or an Array of Strings.
+The returned <tt>results</tt> is either a Fixnum or an Array of Fixnums
+respectively.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000005_source')" id="l_M000005_source">show</a>
+                        
+                    </p>
+                    <div id="M000005_source" class="dyn-source">
+                        <pre>static VALUE rb_Levenshtein_similar(VALUE self, VALUE strings)
+{                                                                            
+    GET_STRUCT(General)
+    return General_iterate_strings(amatch, strings, Levenshtein_similar);
+}</pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+</div>
+    </div>
+  </body>
+</html>    

@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>Amatch::PairDistance</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="../../css/reset.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen" />
+    <script src="../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../js/main.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>     
+    <div class="banner">
+        <h1>
+            <span class="type">Class</span> 
+            Amatch::PairDistance 
+            
+                <span class="parent">&lt; 
+                    
+                    Object
+                    
+                </span>
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../files/ext/amatch_ext_c.html">ext/amatch_ext.c</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+    
+    <div class="description">
+        <p>
+The pair distance between two strings is based on the number of adjacent
+character pairs, that are contained in both strings. The similiarity metric
+of two strings s1 and s2 is
+</p>
+<pre>
+  2*|union(pairs(s1), pairs(s2))| / |pairs(s1)| + |pairs(s2)|
+</pre>
+<p>
+If it is 1.0 the two strings are an exact match, if less than 1.0 they are
+more dissimilar. The advantage of considering adjacent characters, is to
+take account not only of the characters, but also of the character ordering
+in the original strings.
+</p>
+<p>
+This metric is very capable to find similarities in natural languages. It
+is explained in more detail in Simon White&#8217;s article &#8220;How to
+Strike a Match&#8221;, located at this url: <a
+href="http://www.catalysoft.com/articles/StrikeAMatch.html">www.catalysoft.com/articles/StrikeAMatch.html</a>
+It is also very similar (a special case) to the method described under <a
+href="http://citeseer.lcs.mit.edu/gravano01using.html">citeseer.lcs.mit.edu/gravano01using.html</a>
+in &#8220;Using q-grams in a DBMS for Approximate <a
+href="../String.html">String</a> Processing.&#8220;
+</p>
+
+    </div>
+    
+
+    
+
+    
+    
+
+    
+    
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+    
+        <dt>M</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M000029">match</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>N</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M000026">new</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>P</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M000027">pattern</a>,</li>
+                
+                <li><a href="#M000028">pattern=</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>S</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M000059">similar</a></li>
+                
+            </ul>
+        </dd>
+    
+    </dl>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+            <div class="sectiontitle">Class Public methods</div>
+            
+            <div class="method">
+                <div class="title" id="M000026">
+                    
+                    <a name="M000026"></a><b> new(pattern)
+</b>
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Creates a new <a href="PairDistance.html">Amatch::PairDistance</a> instance
+from <tt>pattern</tt>.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000026_source')" id="l_M000026_source">show</a>
+                        
+                    </p>
+                    <div id="M000026_source" class="dyn-source">
+                        <pre>static VALUE rb_PairDistance_initialize(VALUE self, VALUE pattern)
+{
+    GET_STRUCT(PairDistance)
+    PairDistance_pattern_set(amatch, pattern);
+    return self;
+}</pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="sectiontitle">Instance Public methods</div>
+            
+            <div class="method">
+                <div class="title" id="M000029">
+                    
+                    <a name="M000029"></a><b> match(strings, regexp = /\s+/) &rarr; results
+</b>
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Uses this <a href="PairDistance.html">Amatch::PairDistance</a> instance to
+match <a href="PairDistance.html#M000027">PairDistance#pattern</a> against
+<tt>strings</tt>. It returns the pair distance measure, that is a returned
+value of 1.0 is an exact match, partial matches are lower values, while 0.0
+means no match at all.
+</p>
+<p>
+<tt>strings</tt> has to be either a <a href="../String.html">String</a> or
+an Array of Strings. The argument <tt>regexp</tt> is used to split the
+pattern and strings into tokens first. It defaults to /s+/. If the
+splitting should be omitted, call the method with nil as <tt>regexp</tt>
+explicitly.
+</p>
+<p>
+The returned <tt>results</tt> is either a Float or an Array of Floats
+respectively.
+</p>
+
+                </div>
+                
+                
+                <div class="aka">
+                    This method is also aliased as
+                    
+                    <a href="PairDistance.html#M000059">similar</a>
+                    
+                </div>
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000029_source')" id="l_M000029_source">show</a>
+                        
+                    </p>
+                    <div id="M000029_source" class="dyn-source">
+                        <pre>static VALUE rb_PairDistance_match(int argc, VALUE *argv, VALUE self)
+{                                                                            
+    VALUE result, strings, regexp = Qnil;
+    int use_regexp;
+    GET_STRUCT(PairDistance)
+
+    rb_scan_args(argc, argv, &quot;11&quot;, &amp;strings, &amp;regexp);
+    use_regexp = NIL_P(regexp) &amp;&amp; argc != 2;
+    if (TYPE(strings) == T_STRING) {
+        result = PairDistance_match(amatch, strings, regexp, use_regexp);
+    } else {
+        int i;
+        Check_Type(strings, T_ARRAY);
+        result = rb_ary_new2(RARRAY_LEN(strings));
+        for (i = 0; i &lt; RARRAY_LEN(strings); i++) {
+            VALUE string = rb_ary_entry(strings, i);
+            if (TYPE(string) != T_STRING) {
+                rb_raise(rb_eTypeError,
+                    &quot;array has to contain only strings (%s given)&quot;,
+                    NIL_P(string) ?
+                        &quot;NilClass&quot; :
+                        rb_class2name(CLASS_OF(string)));
+            }
+            rb_ary_push(result,
+                PairDistance_match(amatch, string, regexp, use_regexp));
+        }
+    }
+    pair_array_destroy(amatch-&gt;pattern_pair_array);
+    amatch-&gt;pattern_pair_array = NULL;
+    return result;
+}</pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000027">
+                    
+                    <a name="M000027"></a><b> pattern &rarr; pattern string
+</b>
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Returns the current pattern string of this instance.
+</p>
+
+                </div>
+                
+                
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000028">
+                    
+                    <a name="M000028"></a><b> pattern=(pattern)
+</b>
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Sets the current pattern string of this instance to <tt>pattern</tt>.
+</p>
+
+                </div>
+                
+                
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000059">
+                    
+                    <a name="M000059"></a><b>similar</b>(...)
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Alias for <a href="PairDistance.html#M000029">match</a>
+</p>
+
+                </div>
+                
+                
+                
+            </div>
+            
+</div>
+    </div>
+  </body>
+</html>    

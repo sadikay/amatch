@@ -1,0 +1,508 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>Amatch::Sellers</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="../../css/reset.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen" />
+    <script src="../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../js/main.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>     
+    <div class="banner">
+        <h1>
+            <span class="type">Class</span> 
+            Amatch::Sellers 
+            
+                <span class="parent">&lt; 
+                    
+                    Object
+                    
+                </span>
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../files/ext/amatch_ext_c.html">ext/amatch_ext.c</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+    
+    <div class="description">
+        <p>
+The <a href="Sellers.html">Sellers</a> edit distance is very similar to the
+<a href="Levenshtein.html">Levenshtein</a> edit distance. The difference
+is, that you can also specify different weights for every operation to
+prefer special operations over others. This extension of the <a
+href="Sellers.html">Sellers</a> edit distance is also known under the
+names: Needleman-Wunsch distance.
+</p>
+
+    </div>
+    
+
+    
+
+    
+    
+
+    
+    
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+    
+        <dt>D</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M000012">deletion</a>,</li>
+                
+                <li><a href="#M000013">deletion=</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>I</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M000014">insertion</a>,</li>
+                
+                <li><a href="#M000015">insertion=</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>M</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M000017">match</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>N</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M000007">new</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>P</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M000008">pattern</a>,</li>
+                
+                <li><a href="#M000009">pattern=</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>R</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M000016">reset_weights</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>S</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M000018">search</a>,</li>
+                
+                <li><a href="#M000019">similar</a>,</li>
+                
+                <li><a href="#M000010">substitution</a>,</li>
+                
+                <li><a href="#M000011">substitution=</a></li>
+                
+            </ul>
+        </dd>
+    
+    </dl>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+            <div class="sectiontitle">Class Public methods</div>
+            
+            <div class="method">
+                <div class="title" id="M000007">
+                    
+                    <a name="M000007"></a><b> new(pattern)
+</b>
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Creates a new <a href="Sellers.html">Amatch::Sellers</a> instance from
+<tt>pattern</tt>, with all weights initially set to 1.0.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000007_source')" id="l_M000007_source">show</a>
+                        
+                    </p>
+                    <div id="M000007_source" class="dyn-source">
+                        <pre>static VALUE rb_Sellers_initialize(VALUE self, VALUE pattern)
+{
+    GET_STRUCT(Sellers)
+    Sellers_pattern_set(amatch, pattern);
+    Sellers_reset_weights(amatch);
+    return self;
+}</pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="sectiontitle">Instance Public methods</div>
+            
+            <div class="method">
+                <div class="title" id="M000012">
+                    
+                    <a name="M000012"></a><b> deletion &rarr; weight
+</b>
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Returns the weight of the deletion operation, that is used to compute the
+<a href="Sellers.html">Sellers</a> distance.
+</p>
+
+                </div>
+                
+                
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000013">
+                    
+                    <a name="M000013"></a><b> deletion=(weight)
+</b>
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Sets the weight of the deletion operation, that is used to compute the <a
+href="Sellers.html">Sellers</a> distance, to <tt>weight</tt>. The
+<tt>weight</tt> should be a Float value >= 0.0.
+</p>
+
+                </div>
+                
+                
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000014">
+                    
+                    <a name="M000014"></a><b> insertion &rarr; weight
+</b>
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Returns the weight of the insertion operation, that is used to compute the
+<a href="Sellers.html">Sellers</a> distance.
+</p>
+
+                </div>
+                
+                
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000015">
+                    
+                    <a name="M000015"></a><b> insertion=(weight)
+</b>
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Sets the weight of the insertion operation, that is used to compute the <a
+href="Sellers.html">Sellers</a> distance, to <tt>weight</tt>. The
+<tt>weight</tt> should be a Float value >= 0.0.
+</p>
+
+                </div>
+                
+                
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000017">
+                    
+                    <a name="M000017"></a><b> match(strings) &rarr; results
+</b>
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Uses this <a href="Sellers.html">Amatch::Sellers</a> instance to match <a
+href="Sellers.html#M000008">Sellers#pattern</a> against <tt>strings</tt>,
+while taking into account the given weights. It returns the number of
+weighted character operations, the <a href="Sellers.html">Sellers</a>
+distance. <tt>strings</tt> has to be either a <a
+href="../String.html">String</a> or an Array of Strings. The returned
+<tt>results</tt> is either a Float or an Array of Floats respectively.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000017_source')" id="l_M000017_source">show</a>
+                        
+                    </p>
+                    <div id="M000017_source" class="dyn-source">
+                        <pre>static VALUE rb_Sellers_match(VALUE self, VALUE strings)
+{                                                                            
+    GET_STRUCT(Sellers)
+    return Sellers_iterate_strings(amatch, strings, Sellers_match);
+}</pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000008">
+                    
+                    <a name="M000008"></a><b> pattern &rarr; pattern string
+</b>
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Returns the current pattern string of this instance.
+</p>
+
+                </div>
+                
+                
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000009">
+                    
+                    <a name="M000009"></a><b> pattern=(pattern)
+</b>
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Sets the current pattern string of this instance to <tt>pattern</tt>.
+</p>
+
+                </div>
+                
+                
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000016">
+                    
+                    <a name="M000016"></a><b>reset_weights</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Resets all weights (substitution, deletion, and insertion) to 1.0.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000016_source')" id="l_M000016_source">show</a>
+                        
+                    </p>
+                    <div id="M000016_source" class="dyn-source">
+                        <pre>static VALUE rb_Sellers_reset_weights(VALUE self)
+{
+    GET_STRUCT(Sellers)
+    Sellers_reset_weights(amatch);
+    return self;
+}</pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000018">
+                    
+                    <a name="M000018"></a><b> search(strings) &rarr; results
+</b>
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+searches <a href="Sellers.html#M000008">Sellers#pattern</a> in
+<tt>strings</tt> and returns the edit distance (the sum of weighted
+character operations) as a Float value, by greedy trimming prefixes or
+postfixes of the match. <tt>strings</tt> has to be either a <a
+href="../String.html">String</a> or an Array of Strings. The returned
+<tt>results</tt> is either a Float or an Array of Floats respectively.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000018_source')" id="l_M000018_source">show</a>
+                        
+                    </p>
+                    <div id="M000018_source" class="dyn-source">
+                        <pre>static VALUE rb_Sellers_search(VALUE self, VALUE strings)
+{                                                                            
+    GET_STRUCT(Sellers)
+    return Sellers_iterate_strings(amatch, strings, Sellers_search);
+}</pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000019">
+                    
+                    <a name="M000019"></a><b> similar(strings) &rarr; results
+</b>
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Uses this <a href="Sellers.html">Amatch::Sellers</a> instance to match <a
+href="Sellers.html#M000008">Amatch::Sellers#pattern</a> against
+<tt>strings</tt> (taking into account the given weights), and compute a <a
+href="Sellers.html">Sellers</a> distance metric number between 0.0 for very
+unsimilar strings and 1.0 for an exact match. <tt>strings</tt> has to be
+either a <a href="../String.html">String</a> or an Array of Strings. The
+returned <tt>results</tt> is either a Fixnum or an Array of Fixnums
+respectively.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000019_source')" id="l_M000019_source">show</a>
+                        
+                    </p>
+                    <div id="M000019_source" class="dyn-source">
+                        <pre>static VALUE rb_Sellers_similar(VALUE self, VALUE strings)
+{                                                                            
+    GET_STRUCT(Sellers)
+    return Sellers_iterate_strings(amatch, strings, Sellers_similar);
+}</pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000010">
+                    
+                    <a name="M000010"></a><b> substitution &rarr; weight
+</b>
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Returns the weight of the substitution operation, that is used to compute
+the <a href="Sellers.html">Sellers</a> distance.
+</p>
+
+                </div>
+                
+                
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000011">
+                    
+                    <a name="M000011"></a><b> substitution=(weight)
+</b>
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Sets the weight of the substitution operation, that is used to compute the
+<a href="Sellers.html">Sellers</a> distance, to <tt>weight</tt>. The
+<tt>weight</tt> should be a Float value >= 0.0.
+</p>
+
+                </div>
+                
+                
+                
+            </div>
+            
+</div>
+    </div>
+  </body>
+</html>    
