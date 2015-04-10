@@ -10,19 +10,17 @@ substring length, the pair distance metric, the Jaro-Winkler metric.
 
 == Installation
 
-Just type into the command line as root:
+Intall Ruby
 
- # ruby install.rb
-
-If you have installed rake (rake.rubyforge.org), you can also type:
-
- # rake install
+  https://www.ruby-lang.org/en/documentation/installation/
 
 To install this extension as a gem type
 
  # gem install amatch
 
-== Examples
+== Examples in Terminal
+ $ irb
+
  require 'amatch'
  # => true
  include Amatch
